@@ -100,7 +100,7 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 	private List<RadialMenuItem> children = new ArrayList<RadialMenuItem>();
 
 	// gps
-	private Location startLocation, currentLocation;
+	private Location startLocation = null, currentLocation;
 	private double mileage;
 	private long startTimeStamp, endTimeStamp;
 
@@ -109,7 +109,8 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_speed);
 		initView();
 		// initialize your android device sensor capabilities
@@ -223,7 +224,6 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 	}
 
 	void initData() {
-		startLocation = new GpsApi(SpeedWarningActivity.this).getLocation();
 		mileage = 0f;
 		startTimeStamp = System.currentTimeMillis();
 	}
@@ -278,9 +278,9 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 		speedometer.setSpeed(0);
 
 		// Configure value range colors
-		speedometer.addColoredRange(0, 15, Color.GREEN);
-		speedometer.addColoredRange(15, 30, Color.YELLOW);
-		speedometer.addColoredRange(30, 60, Color.RED);
+		// speedometer.addColoredRange(0, 15, Color.GREEN);
+		// speedometer.addColoredRange(15, 30, Color.YELLOW);
+		// speedometer.addColoredRange(30, 60, Color.RED);
 
 		compassImage = (ImageView) findViewById(R.id.iv_compass);
 		compassTextView = (TextView) findViewById(R.id.tv_compass);
@@ -612,7 +612,8 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 		public void handleMessage(Message msg) {
 			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
 			double d = (Double) msg.obj;
-			mileageTextView.setText(df.format(d));
+			mileage += d;
+			mileageTextView.setText(df.format(mileage));
 		}
 	};
 	Runnable CalculateMileageRunnable = new Runnable() {
@@ -621,9 +622,14 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 		public void run() {
 			// TODO Auto-generated method stub
 			if (currentLocation != null && startLocation != null) {
-				mileage += Distance.calculateDistance(currentLocation.getLatitude(), currentLocation.getLongitude(),
-						startLocation.getLatitude(), startLocation.getLongitude(), Distance.KILOMETERS);
-				mileageHandler.obtainMessage(0, -1, -1, mileage).sendToTarget();
+				// double d =
+				// Distance.calculateDistance(currentLocation.getLatitude(),
+				// currentLocation.getLongitude(),
+				// startLocation.getLatitude(), startLocation.getLongitude(),
+				// Distance.KILOMETERS);
+				double d = Distance.getDistance(startLocation.getLatitude(), startLocation.getLongitude(), currentLocation.getLatitude(),
+						currentLocation.getLongitude());
+				mileageHandler.obtainMessage(0, -1, -1, d).sendToTarget();
 			}
 		}
 
@@ -692,17 +698,16 @@ public class SpeedWarningActivity extends Activity implements GPSCallback {
 				Shimmer shimmer = new Shimmer();
 				shimmerTextView.setText("搜索到：" + count + "颗卫星");
 				shimmer.start(shimmerTextView);
-				if (count > 1) {
-
-					Location gpsLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-					if (gpsLocation != null) {
-						startLocation = gpsLocation;
-					}
-				}
-
 				break;
 			case GpsStatus.GPS_EVENT_FIRST_FIX:
 				Log.i(TAG, "第一次定位");
+				Location gpsLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				if (gpsLocation != null) {
+					if (startLocation == null) {
+						startLocation = gpsLocation;
+					}
+
+				}
 				Toast.makeText(SpeedWarningActivity.this, "第一次定位", Toast.LENGTH_LONG).show();
 				break;
 			}

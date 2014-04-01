@@ -1,0 +1,9 @@
+# view AndroidManifest.xml #generated:20
+-keep class com.tuo.bicyclists.ui.SpeedWarningActivity { <init>(...); }
+
+# view res/layout/activity_speed.xml #generated:52
+-keep class com.tuo.third.library.shimmer.ShimmerTextView { <init>(...); }
+
+# view res/layout/activity_speed.xml #generated:59
+-keep class com.tuo.ui.widget.SpeedometerView { <init>(...); }
+

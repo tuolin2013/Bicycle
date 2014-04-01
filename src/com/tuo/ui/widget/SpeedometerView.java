@@ -364,8 +364,8 @@ public class SpeedometerView extends View {
 
 		// canvas.drawBitmap(mask, oval.centerX() - oval.width()*1.1f/2,
 		// oval.centerY()-oval.width()*1.1f/2, maskPaint);
-		//set background to black
-		canvas.drawColor(Color.BLACK);
+		// set background to black
+		canvas.drawColor(Color.TRANSPARENT);
 	}
 
 	@SuppressWarnings("NewApi")
@@ -376,12 +376,13 @@ public class SpeedometerView extends View {
 
 		backgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		backgroundPaint.setStyle(Paint.Style.FILL);
-		backgroundPaint.setColor(Color.rgb(127, 127, 127));
+		// backgroundPaint.setColor(Color.rgb(127, 127, 127));
+		backgroundPaint.setColor(Color.TRANSPARENT);
 
 		backgroundInnerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		backgroundInnerPaint.setStyle(Paint.Style.FILL);
-		backgroundInnerPaint.setColor(Color.rgb(150, 150, 150));
-
+		// backgroundInnerPaint.setColor(Color.rgb(150, 150, 150));
+		backgroundInnerPaint.setColor(Color.TRANSPARENT);
 		txtPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		txtPaint.setColor(Color.WHITE);
 		txtPaint.setTextSize(labelTextSize);
@@ -406,6 +407,7 @@ public class SpeedometerView extends View {
 		needlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		needlePaint.setStrokeWidth(5);
 		needlePaint.setStyle(Paint.Style.STROKE);
+//		needlePaint.setColor(Color.argb(200, 255, 0, 0));
 		needlePaint.setColor(Color.argb(200, 255, 0, 0));
 	}
 

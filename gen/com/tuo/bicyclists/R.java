@@ -68,19 +68,21 @@ containing a value of this type.
         public static final int ic_contact=0x7f020009;
         public static final int ic_launcher=0x7f02000a;
         public static final int icon=0x7f02000b;
-        public static final int spot_mask=0x7f02000c;
-        public static final int spot_mask_1=0x7f02000d;
+        public static final int popup_window_bg=0x7f02000c;
+        public static final int road=0x7f02000d;
+        public static final int spot_mask=0x7f02000e;
+        public static final int spot_mask_1=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f080010;
+        public static final int action_settings=0x7f080011;
         public static final int btn_end=0x7f08000f;
         public static final int btn_start=0x7f08000e;
         public static final int info_message=0x7f080007;
         public static final int iv_compass=0x7f080002;
         public static final int ll_container=0x7f080001;
         public static final int ll_mileage=0x7f080008;
-        public static final int menu_about=0x7f080014;
-        public static final int menu_settings=0x7f080011;
+        public static final int menu_about=0x7f080015;
+        public static final int menu_settings=0x7f080012;
         public static final int scrollView1=0x7f080000;
         public static final int shimmerTextView1=0x7f080005;
         public static final int speedometer=0x7f080006;
@@ -91,12 +93,14 @@ containing a value of this type.
         public static final int tv_sec=0x7f08000c;
         public static final int tv_start_time=0x7f08000d;
         public static final int tv_temperature=0x7f080004;
-        public static final int unit_km=0x7f080012;
-        public static final int unit_miles=0x7f080013;
+        public static final int unit_km=0x7f080013;
+        public static final int unit_miles=0x7f080014;
+        public static final int webView1=0x7f080010;
     }
     public static final class layout {
         public static final int about=0x7f030000;
         public static final int activity_speed=0x7f030001;
+        public static final int webview=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f070000;
